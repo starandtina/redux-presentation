@@ -1,0 +1,249 @@
+import { CodeSurfer } from 'mdx-deck-code-surfer'
+import { Appear, Notes, Image } from 'mdx-deck'
+
+export { dark as theme } from 'mdx-deck/themes'
+import { Split } from 'mdx-deck/layouts'
+
+# The Tao of Redux
+
+---
+
+# What is Redux
+
+---
+
+## A predictable state container for JavaScript apps.
+
+---
+
+Redux is, at its core, an incredibly simple pattern.
+
+<ul style={{textAlign: "left"}}>
+ <Appear>
+    <li>It saves a current value</li>
+    <li>then runs a single function(reducer) to update that value when needed</li>
+    <li>and notifies any subscribers that something has changed</li>
+ </Appear>
+</ul>
+---
+
+export default Split
+
+<ul style={{ textAlign: 'left' }}>
+  <li>It saves a current value</li>
+  <li>then runs a single function(reducer) to update that value when needed</li>
+  <li>and notifies any subscribers that something has changed</li>
+</ul>
+
+<ul style={{ textAlign: 'left' }}>
+  <Appear>
+    <li>Describe application state as plain objects and arrays.</li>
+    <li>
+      Describe changes in the system as plain objects. -{' '}
+      <strong>What happened</strong>
+    </li>
+    <li>
+      Describe the logic for handling changes as pure functions. -{' '}
+      <strong>How things changed</strong>
+    </li>
+  </Appear>
+</ul>
+
+---
+
+<CodeSurfer
+  title={() => (
+    <a target="__blank" href="https://bit.ly/2U9xlcs">
+      Demo
+    </a>
+  )}
+  code={require('!raw-loader!./demo.react-state-reducer.Counter.js')}
+  lang="javascript"
+  showNumbers={false}
+  steps={[
+    { notes: 'Use ⬆️ and ⬇️ keys' },
+    { lines: [5], notes: 'initialState' },
+    { range: [7, 16], notes: 'rootReducer' },
+    { range: [18, 32], notes: 'run it' },
+  ]}
+/>
+
+---
+
+# Three Principles
+
+---
+
+# Single source of truth
+
+---
+
+# State is read-only
+
+---
+
+# Changes are made with pure functions
+
+---
+
+# Why we need Redux
+
+---
+
+## If you wanna build a Web App
+
+<ul style={{ textAlign: 'left' }}>
+  <Appear>
+    <li>
+      HTML / Template = <strong>View</strong>
+    </li>
+    <li>
+      Data that will populate our views = <strong>Model</strong>
+    </li>
+    <li>
+      Logic to retrieve/modify data, glue all views together and to react
+      accordingly to user events, etc. = <strong>Controller</strong>
+    </li>
+    <h2>MVC?</h2>
+  </Appear>
+</ul>
+
+---
+
+## Use-case for Classic MVC - Backbone
+
+<ul style={{ textAlign: 'left' }}>
+  <Appear>
+    <li>User clicks on button <strong>A</strong></li>
+    <li>A click handler on button <strong>A</strong> triggers a change on Model <strong>A</strong></li>
+    <li>A change handler on Model <strong>A</strong> triggers a change on Model <strong>B</strong></li>
+    <li>A change handler on Model <strong>B</strong> triggers a change on View <strong>B</strong> that re-renders itself</li>
+  </Appear>
+</ul>
+---
+
+## How to do it with Redux
+
+<ul style={{ textAlign: 'left' }}>
+  <Appear>
+    <li>User clicks on button <strong>A</strong></li>
+    <li>A handler on button <strong>A</strong> triggers an action that is dispatched and produces a change on Store</li>
+    <li>View <strong>B</strong> gets notified by the change, and re-renders</li>
+  </Appear>
+</ul>
+---
+
+# How Redux works
+
+```JavaScript
+action ---> dispatcher ---> middleware 1 ---> middleware 2 ---> ... ---> reducers
+```
+
+---
+
+<img
+  style={{ height: 'auto', maxWidth: '100%' }}
+  src="https://gw-office.alipayobjects.com/basement_prod/456b5074-1fb0-4aa3-819f-8b2084affe8f.jpeg"
+/>
+
+---
+
+<CodeSurfer
+  title="99 lines of Redux"
+  code={require('!raw-loader!./redux.js')}
+  lang="javascript"
+  showNumbers={false}
+  steps={[
+    { notes: 'Use ⬆️ and ⬇️ keys' },
+    { lines: [98], notes: 'Redux API' },
+    { range: [1, 6], notes: 'mapValues' },
+    { range: [8, 15], notes: 'pick' },
+    { range: [17, 19], notes: 'bindActionCreator' },
+    { range: [21, 27], notes: 'bindActionCreators' },
+    { range: [29, 32], notes: 'compose' },
+    { range: [33, 46], notes: 'applyMiddleware' },
+    { range: [49, 54], notes: 'combineReducers' },
+    { range: [56, 99], notes: 'createStore' },
+  ]}
+/>
+
+---
+
+<CodeSurfer
+  title="Redux@createStore"
+  code={require("!raw-loader!./createStore.js")}
+  lang="javascript"
+  showNumbers={false}
+   steps={[
+    { notes: "Use ⬆️ and ⬇️ keys" },
+    { lines: [24], notes: "createStore API" },
+    { range: [5, 7], notes: "getState" },
+    { range: [9, 15], notes: "subscribe" },
+    { range: [17, 20], notes: "dispatch" },
+  ]}
+/>
+---
+
+## What does Redux not provide
+
+<ul style={{textAlign: "left"}}>
+  <Appear>
+    <li>Immutability</li>
+    <li>Pure functions</li>
+    <li>Middlewares</li>
+    <li>Normalization</li>
+    <li>Selectors</li>
+    <li>Thunks</li>
+    <li>Sagas</li>
+    <li>Layout</li>
+    <li>Action creator?</li>
+    <li>...</li>
+  </Appear>
+</ul>
+---
+
+## What does Redux provide
+
+---
+
+Redux ~= [MVC](https://bit.ly/2CFJrCP)
+
+```notes
+简单来说，经典的 MVC 架构是这样工作的。首先我们会有一个 Model，它往往是整个 MVC 架构的中心。如果这个 Model 有更新了，它会通知它的观察者们某个改变发生了。然后是 View，它就是我们常常能看到的UI，并且View一般会监听着 Model。当 View 收到 Model 发来的更新通知时，View 会更新它的外观来反映Model的更新。作为用户的我们通常是与 View 交互（如点击，输入事件等等），但是呢，View 并不知道如何处理用户的交互操作。所以呢，View 会告诉 Controller 用户刚刚做了什么并且假设 Controller 知道如何处理用户的操作。Controller 这时候会更新 Model，之后不会一次一次又一次一次的重复重复再重复。另外，所有通信都是单向的。
+```
+
+---
+
+Action = Controller
+
+```notes
+Action 主要描述了发生了什么（What happened）。实际开发中，我们可以把 Action 当成 Controller 来对待的。无论何时，只要你想触发一个修改（如响应 DOM 事件，异步加载数据，设置 Dropdown 组件打开状态等等），那么你就可以派发一个Action。这就像在 MVC 中，你也会交给 Controller来处理接下来的事情一样。（Controller 可能会去更新相应的 Model，从而触发重新渲染）
+```
+
+---
+
+Reducer ~= Model
+
+```notes
+Reducer 主要描述了如何处理这些改变 (How things changed)。也就是说，Reducers 会负责管理 Web App 当前的状态（比如，用户登录信息，Domain 数据，UI 状态，App 状态等等）。当我们派发一个 Action 时，也就是交给 Reducer 来决定如何更新当前的状态。与经典的 MVC 相比，我们是交给 Model 来更新相应的状态的，比如常常会看到 Model 中会有很多叫 setXXX 的方法，而在 Redux 中，也会有一个相应的 Reduer 来响应这些 setXXX，从而更新相应的状态值。
+```
+
+---
+
+Store
+
+```notes
+Store 主要存储了当前 Web App 的状态。Store 是 Redux 独有的一个概念，在经典的 MVC 中，没有一个与 Store 相对应的。Redux 中的 Store 更像是一个聚集了所有分片 Reducers 的状态容器。Store 提供了一个叫getState 的 API 用于获取当前的状态，同时，也暴露了订阅状态更新的接口（react-redux 中 connect() 正是利用了这个接口来监听状态改变从而更新组件的 props）。Store 也会接受所有派发的 Action，同时它会将这些 Action 传递给所有的 Reducer（也许是通过 combineReducers），从而更新状态。Store 也支持 Middleware（中间件）函数，从而让在调用真正的 Reducer 之前实现自定义逻辑（派发 Thunks 或是 Promises），中间件函数一般是用于处理异步数据获取，日志等等功能。
+```
+
+---
+
+# Philosophy & Design Goals
+
+## https://bit.ly/2T1InjK
+
+---
+
+# FAQ
+
+---

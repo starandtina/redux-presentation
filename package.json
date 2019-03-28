@@ -1,0 +1,17 @@
+{
+  "name": "redux-presentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck redux-presentation.mdx -h dev.alipay.net",
+    "build": "mdx-deck build --no-html redux-presentation.mdx"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mdx-deck": "^1.8.2",
+    "mdx-deck-code-surfer": "^0.5.3",
+    "raw-loader": "^1.0.0"
+  }
+}
